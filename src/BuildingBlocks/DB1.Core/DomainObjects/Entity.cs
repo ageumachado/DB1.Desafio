@@ -1,4 +1,6 @@
 ﻿using DB1.Core.Messages;
+using FluentValidation;
+using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -96,11 +98,20 @@ namespace DB1.Core.DomainObjects
 
     public abstract class BaseEntity
     {
+        public bool Valid { get; private set; }
+        public bool Invalid => !Valid;
+        public ValidationResult ValidationResult { get; private set; }
+
         private List<Event>? _notificacoes;
 
         [JsonIgnore]
         public IReadOnlyCollection<Event> Notificacoes => _notificacoes ?? new List<Event>();
 
+        public bool Validate<TModel>(TModel model, AbstractValidator<TModel> validator)
+        {
+            ValidationResult = validator.Validate(model);
+            return Valid = ValidationResult.IsValid;
+        }
 
         public void AdicionarEvento(Event evento)
         {

@@ -1,31 +1,31 @@
 ﻿using DB1.Core.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DB1.Core.ValueObjects
 {
     /// <summary>
     /// Gerenciador de CPF ou CNPJ
     /// </summary>
-    public record CpfCnpj
+    public record Cnpj
     {
         public string Numero { get; } = string.Empty;
         //private string _cpfCnpj;
 
         // Obrigatório para funcionar com EF
-        protected CpfCnpj() { }
+        protected Cnpj() { }
 
-        private CpfCnpj(string cpfCnpj)
+        private Cnpj(string cnpj)
         {
-            //_cpfCnpj = cpfCnpj;
-            Numero = cpfCnpj;
+            Numero = cnpj;
         }
 
         /// <inheritdoc/>
-        public static CpfCnpj Parse(string value)
+        public static Cnpj Empty()
+        {
+            return new Cnpj("");
+        }
+
+        /// <inheritdoc/>
+        public static Cnpj Parse(string value)
         {
             if (TryParse(value, out var result))
                 return result;
@@ -33,19 +33,17 @@ namespace DB1.Core.ValueObjects
             throw new CpfCnpjInvalidoException(value);
         }
 
-        public static bool TryParse(string value, out CpfCnpj cpfCnpj)
+        public static bool TryParse(string value, out Cnpj cpfCnpj)
         {
-            cpfCnpj = new CpfCnpj(value);
+            cpfCnpj = new Cnpj(value);
             return IsValid(value);
         }
 
-        //public override string ToString() => _cpfCnpj;
         public override string ToString() => Numero;
 
-        public static implicit operator CpfCnpj(string cpfCnpj) => Parse(cpfCnpj);
+        public static implicit operator Cnpj(string cpfCnpj) => Parse(cpfCnpj);
 
-        public static implicit operator string(CpfCnpj cpfCnpj) => cpfCnpj.Numero;
-        //public static implicit operator string(CpfCnpj cpfCnpj) => cpfCnpj._cpfCnpj;
+        public static implicit operator string(Cnpj cpfCnpj) => cpfCnpj.Numero;
 
         /// <summary>
         /// Valida elemento

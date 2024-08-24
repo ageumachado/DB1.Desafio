@@ -14,7 +14,7 @@ namespace DB1.Core.Extensions
         /// </summary>
         public static IRuleBuilderOptions<T, string?> IsCnpj<T>(this IRuleBuilder<T, string?> ruleBuilder)
         {
-            var retorno = ruleBuilder.Must(ValueObjects.CpfCnpj.IsValid).WithMessage("The Cnpj is invalid");
+            var retorno = ruleBuilder.Must(ValueObjects.Cnpj.IsValid).WithMessage("The Cnpj is invalid");
             return retorno;
         }
 
@@ -23,7 +23,7 @@ namespace DB1.Core.Extensions
         /// </summary>
         public static IRuleBuilderOptions<T, string?> IsCpf<T>(this IRuleBuilder<T, string?> ruleBuilder)
         {
-            var retorno = ruleBuilder.Must(ValueObjects.CpfCnpj.IsValid).WithMessage("The Cpf is invalid");
+            var retorno = ruleBuilder.Must(ValueObjects.Cpf.IsValid).WithMessage("The Cpf is invalid");
             return retorno;
         }
 
