@@ -28,11 +28,13 @@ namespace DB1.Desafio.Tests.Fixtures
                     if (!dadosValido)
                     {
                         return new Empresa(
+                            Guid.Empty,
                             "",
                             "",
                             DateTime.MinValue);
                     }
                     return new Empresa(
+                        f.Random.Guid(),
                     f.Company.CompanyName(),
                     Geradores.GerarCnpj(),
                     f.Date.Recent(100).Date);

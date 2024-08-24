@@ -30,6 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DB1.Desafio.Application\DB1.Desafio.Application.csproj" />
     <ProjectReference Include="..\DB1.Desafio.Domain\DB1.Desafio.Domain.csproj" />
   </ItemGroup>
 

@@ -1,4 +1,5 @@
 ﻿using DB1.Core.DomainObjects;
+using DB1.Core.ValueObjects;
 using DB1.Desafio.Domain.Enums;
 using FluentValidation;
 
@@ -7,16 +8,20 @@ namespace DB1.Desafio.Domain.Entities
     public class Empresa : Entity, IAggregateRoot
     {
         public string Nome { get; private set; }
-        public string Cnpj { get; private set; }
+        public Cnpj Cnpj { get; private set; }
         public DateTime DataFundacao { get; private set; }
         public StatusEmpresa Status { get; private set; }
 
-        public Empresa(string nome, string cnpj, DateTime dataFundacao)
+        // EF
+        protected Empresa() { }
+
+        public Empresa(Guid id, string nome, Cnpj cnpj, DateTime dataFundacao, StatusEmpresa status = StatusEmpresa.Ativo)
         {
+            Id = id;
             Nome = nome;
             Cnpj = cnpj;
             DataFundacao = dataFundacao;
-            Ativar();
+            Status = status;
 
             Validate(this, new EmpresaValidator());
         }
@@ -39,7 +44,7 @@ namespace DB1.Desafio.Domain.Entities
                 .NotEmpty().WithMessage("Informe o nome")
                 .MaximumLength(NOME_MAX_LENGTH).WithMessage("Quantidade máxima de caracteres é de {MaxLength}");
 
-            RuleFor(a => a.Cnpj)
+            RuleFor(a => a.Cnpj.Numero)
                 .NotNull().WithMessage("Informe o CNPJ")
                 .Length(CNPJ_LENGTH).WithMessage($"Tamanho deve ser {CNPJ_LENGTH}");
                 //.IsCnpj().WithMessage("CNPJ inválido");

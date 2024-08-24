@@ -48,7 +48,7 @@ namespace DB1.Desafio.Tests.Domain
         {
             // Arrange
             var nomeTamanhoAcima = EmpresaValidator.NOME_MAX_LENGTH + 1;
-            var empresa = new Empresa(Geradores.CaracteresAleatorio(nomeTamanhoAcima), CNPJ, DATA_FUNDACAO); ;
+            var empresa = new Empresa(Guid.NewGuid(), Geradores.CaracteresAleatorio(nomeTamanhoAcima), CNPJ, DATA_FUNDACAO); ;
 
             // Act
             var result = empresa.Invalid;
@@ -63,7 +63,7 @@ namespace DB1.Desafio.Tests.Domain
         public void Empresa_DataFundacao_IgualDataMinima_DeveGerarError()
         {
             // Arrange
-            var empresa = new Empresa(NOME, CNPJ, DateTime.MinValue);
+            var empresa = new Empresa(Guid.NewGuid(), NOME, CNPJ, DateTime.MinValue);
 
             // Act
             var result = empresa.Invalid;
@@ -78,7 +78,7 @@ namespace DB1.Desafio.Tests.Domain
         public void Empresa_DataFundacao_MaiorDataMinima_DeveGerarSucesso()
         {
             // Arrange
-            var empresa = new Empresa(NOME, CNPJ, DateTime.MinValue.AddDays(1));
+            var empresa = new Empresa(Guid.NewGuid(), NOME, CNPJ, DateTime.MinValue.AddDays(1));
 
             // Act
             var result = empresa.Valid;
@@ -93,7 +93,7 @@ namespace DB1.Desafio.Tests.Domain
         public void Empresa_Cnpj_AcimaNumeroPadrao_DeveGerarError()
         {
             // Arrange
-            var empresa = new Empresa(NOME, string.Concat(CNPJ, "0"), DateTime.Now.AddDays(-100));
+            var empresa = new Empresa(Guid.NewGuid(), NOME, new Core.ValueObjects.Cnpj(string.Concat(CNPJ, "0")), DateTime.Now.AddDays(-100));
 
             // Act
             var result = empresa.Invalid;
@@ -108,7 +108,7 @@ namespace DB1.Desafio.Tests.Domain
         public void Empresa_Cnpj_AbaixoNumeroPadrao_DeveGerarError()
         {
             // Arrange
-            var empresa = new Empresa(NOME, CNPJ.Substring(0, CNPJ.Length - 1), DateTime.Now.AddDays(-100));
+            var empresa = new Empresa(Guid.NewGuid(), NOME, new Core.ValueObjects.Cnpj(CNPJ.Substring(0, CNPJ.Length - 1)), DateTime.Now.AddDays(-100));
 
             // Act
             var result = empresa.Invalid;
@@ -123,7 +123,7 @@ namespace DB1.Desafio.Tests.Domain
         public void Empresa_NovaEmpresa_DeveValoresCorretos()
         {
             // Arrange
-            var empresa = new Empresa(NOME, CNPJ, DATA_FUNDACAO);
+            var empresa = new Empresa(Guid.NewGuid(), NOME, CNPJ, DATA_FUNDACAO);
 
             // Act & Assert
             Assert.Equal(NOME, empresa.Nome);

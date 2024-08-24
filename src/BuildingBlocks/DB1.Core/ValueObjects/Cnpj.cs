@@ -13,7 +13,7 @@ namespace DB1.Core.ValueObjects
         // Obrigatório para funcionar com EF
         protected Cnpj() { }
 
-        private Cnpj(string cnpj)
+        public Cnpj(string cnpj)
         {
             Numero = cnpj;
         }
@@ -48,18 +48,13 @@ namespace DB1.Core.ValueObjects
         /// <summary>
         /// Valida elemento
         /// </summary>
-        /// <param name="cpfCnpj">string</param>
+        /// <param name="cnpj">string</param>
         /// <returns>bool</returns>
-        public static bool IsValid(string? cpfCnpj)
+        public static bool IsValid(string? cnpj)
         {
-            if (string.IsNullOrEmpty(cpfCnpj)) return true;
+            if (string.IsNullOrEmpty(cnpj)) return true;
 
-            var cpfValido = ValidarCPF(cpfCnpj);
-
-            if (cpfValido)
-                return cpfValido;
-
-            return ValidarCnpj(cpfCnpj);
+            return ValidarCnpj(cnpj);
         }
 
         private static bool ValidarCnpj(string cnpj)
