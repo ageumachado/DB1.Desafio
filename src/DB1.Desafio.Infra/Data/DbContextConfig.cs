@@ -4,9 +4,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DB1.Desafio.Infra.Data
 {
-    internal static class DbContextConfig
+    public static class DbContextConfig
     {
-        public static IServiceCollection AddDbContextAndMigrateTenant(this IServiceCollection services,
+        public static IServiceCollection AddDbContext(this IServiceCollection services,
             IConfiguration configuration)
         {
             services.AddDbContext<Db1DataContext>(m =>
