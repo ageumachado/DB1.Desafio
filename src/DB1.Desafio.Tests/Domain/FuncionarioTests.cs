@@ -1,13 +1,7 @@
-﻿using DB1.Core.ValueObjects;
-using DB1.Desafio.Domain.Entities;
+﻿using DB1.Desafio.Domain.Entities;
 using DB1.Desafio.Domain.Enums;
 using DB1.Desafio.Tests.Fixtures;
 using DB1.Desafio.Tests.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DB1.Desafio.Tests.Domain
 {
@@ -54,15 +48,15 @@ namespace DB1.Desafio.Tests.Domain
         {
             // Arrange
             var nomeTamanhoAcima = FuncionarioValidator.NOME_MAX_LENGTH + 1;
-            var Funcionario = new Funcionario(Geradores.CaracteresAleatorio(nomeTamanhoAcima), 
+            var funcionario = new Funcionario(Geradores.CaracteresAleatorio(nomeTamanhoAcima), 
                 CPF, DATA_CONTRATACAO);
 
             // Act
-            var result = Funcionario.Invalid;
+            var result = funcionario.Invalid;
 
             // Assert 
             Assert.True(result);
-            Assert.Equal(1, Funcionario.ValidationResult.Errors.Count);
+            Assert.Equal(1, funcionario.ValidationResult.Errors.Count);
         }
 
         [Fact(DisplayName = "Data contratação igual data mínima, deve gerar error")]

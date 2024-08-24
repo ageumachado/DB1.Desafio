@@ -2,11 +2,6 @@
 using DB1.Desafio.Domain.Enums;
 using DB1.Desafio.Tests.Fixtures;
 using DB1.Desafio.Tests.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DB1.Desafio.Tests.Domain
 {
