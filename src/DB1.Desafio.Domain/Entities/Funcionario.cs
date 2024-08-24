@@ -21,6 +21,21 @@ namespace DB1.Desafio.Domain.Entities
             Validate(this, new FuncionarioValidator());
         }
 
+
+        public Guid EmpresaId { get; private set; }
+        public Empresa Empresa { get; private set; }
+
+        private List<Cargo>? _cargos;
+        public IReadOnlyCollection<Cargo> Cargos => _cargos ?? [];
+
+        public void AdicionarCargo(params Cargo[] cargos)
+        {
+            _cargos ??= [];
+            _cargos.AddRange(cargos);
+        }
+        public void LimparCargos() => _cargos?.Clear();
+
+
         public void Ativar() => Status = Status.Ativo;
         public void Inativar() => Status = Status.Inativo;
         public void Remover() => Status = Status.Removido;

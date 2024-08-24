@@ -17,6 +17,8 @@ namespace DB1.Desafio.Domain.Entities
             Validate(this, new CargoValidator());
         }
 
+        public ICollection<Funcionario>? Funcionarios { get; set; }
+
         public void Ativar() => Status = Status.Ativo;
         public void Inativar() => Status = Status.Inativo;
         public void Remover() => Status = Status.Removido;

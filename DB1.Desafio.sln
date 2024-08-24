@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35219.272
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DB1.Core", "src\BuildingBlocks\DB1.Core\DB1.Core.csproj", "{869B063C-F77A-446F-8E5A-D665E3AC4253}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DB1.Core", "src\BuildingBlocks\DB1.Core\DB1.Core.csproj", "{869B063C-F77A-446F-8E5A-D665E3AC4253}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Building Blocks", "1 - Building Blocks", "{779B11D2-4453-4EFB-AED8-C2775DCF4EA1}"
 EndProject
@@ -11,11 +11,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{3239A732-0
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Domain", "4 - Domain", "{BCBE8B9D-3136-49F0-8463-99E37CB248C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DB1.Desafio.Domain", "src\DB1.Desafio.Domain\DB1.Desafio.Domain.csproj", "{274B3AB2-9FA2-4F87-BBA2-33A6B4E5C141}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DB1.Desafio.Domain", "src\DB1.Desafio.Domain\DB1.Desafio.Domain.csproj", "{274B3AB2-9FA2-4F87-BBA2-33A6B4E5C141}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6 - Tests", "6 - Tests", "{DB107209-7F82-4A81-AC32-792691A98641}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "7 - Tests", "7 - Tests", "{DB107209-7F82-4A81-AC32-792691A98641}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DB1.Desafio.Tests", "src\DB1.Desafio.Tests\DB1.Desafio.Tests.csproj", "{F42C7C7A-2D36-42EA-8D12-1C1402283DC8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DB1.Desafio.Tests", "src\DB1.Desafio.Tests\DB1.Desafio.Tests.csproj", "{F42C7C7A-2D36-42EA-8D12-1C1402283DC8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6 - Infrastructure", "6 - Infrastructure", "{938084B5-2752-4F3C-8A44-194F82EDC4A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DB1.Desafio.Infra", "src\DB1.Desafio.Infra\DB1.Desafio.Infra.csproj", "{CCA1BF53-6D50-410A-B4E5-F1D96442D57A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +39,10 @@ Global
 		{F42C7C7A-2D36-42EA-8D12-1C1402283DC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F42C7C7A-2D36-42EA-8D12-1C1402283DC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F42C7C7A-2D36-42EA-8D12-1C1402283DC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCA1BF53-6D50-410A-B4E5-F1D96442D57A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCA1BF53-6D50-410A-B4E5-F1D96442D57A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCA1BF53-6D50-410A-B4E5-F1D96442D57A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCA1BF53-6D50-410A-B4E5-F1D96442D57A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,6 +52,7 @@ Global
 		{3239A732-04D1-4210-957D-47DC2D22394E} = {779B11D2-4453-4EFB-AED8-C2775DCF4EA1}
 		{274B3AB2-9FA2-4F87-BBA2-33A6B4E5C141} = {BCBE8B9D-3136-49F0-8463-99E37CB248C5}
 		{F42C7C7A-2D36-42EA-8D12-1C1402283DC8} = {DB107209-7F82-4A81-AC32-792691A98641}
+		{CCA1BF53-6D50-410A-B4E5-F1D96442D57A} = {938084B5-2752-4F3C-8A44-194F82EDC4A2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E8BDDAAA-FB8E-42C6-AC19-E64664846D9C}

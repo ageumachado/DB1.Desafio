@@ -21,6 +21,8 @@ namespace DB1.Desafio.Domain.Entities
             Validate(this, new EmpresaValidator());
         }
 
+        public ICollection<Funcionario> Funcionarios { get; private set; }
+
         public void Ativar() => Status = StatusEmpresa.Ativo;
         public void Inativar() => Status = StatusEmpresa.Inativo;
         public void Remover() => Status = StatusEmpresa.Removido;
