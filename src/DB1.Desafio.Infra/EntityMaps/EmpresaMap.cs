@@ -24,9 +24,13 @@ namespace DB1.Desafio.Infra.EntityMaps
                 .IsUnicode(false)
                 .HasMaxLength(150);
 
-            builder.Property(p => p.Cnpj)
-                .IsUnicode(false)
-                .HasMaxLength(14);
+            builder.OwnsOne(p => p.Cnpj, documento =>
+            {
+                documento.Property("Numero")
+                    .IsUnicode(false)
+                    .HasColumnName("Cnpj")
+                    .HasMaxLength(14);
+            });
 
             builder.Property(p => p.Status)
                .HasConversion(new EnumToStringConverter<StatusEmpresa>())

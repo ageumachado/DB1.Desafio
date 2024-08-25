@@ -19,9 +19,13 @@ namespace DB1.Desafio.Infra.EntityMaps
                 .IsUnicode(false)
                 .HasMaxLength(150);
 
-            builder.Property(p => p.Cpf)
-                .IsUnicode(false)
-                .HasMaxLength(11);
+            builder.OwnsOne(p => p.Cpf, documento =>
+            {
+                documento.Property("Numero")
+                    .IsUnicode(false)
+                    .HasColumnName("Cpf")
+                    .HasMaxLength(11);
+            });
 
             builder.Property(p => p.Status)
                .HasConversion(new EnumToStringConverter<Status>())
@@ -33,18 +37,27 @@ namespace DB1.Desafio.Infra.EntityMaps
                 .HasForeignKey(p => p.EmpresaId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasMany(p => p.Cargos)
-                .WithMany(p => p.Funcionarios)
-                .UsingEntity<FuncionarioCargo>(
-                    e => e.HasOne(x => x.Cargo).WithMany(),
-                    e => e.HasOne(x => x.Funcionario).WithMany(),
-                    join =>
-                    {
-                        join.ToTable($"{nameof(FuncionarioCargo)}");
-                        join.HasKey($"{nameof(Funcionario)}Id", $"{nameof(Cargo)}Id");
-                    });
+            builder.HasQueryFilter(p => p.Status != Status.Removido);            
+        }
+    }
 
-            builder.HasQueryFilter(p => p.Status != Status.Removido);
+    internal class FuncionarioCargoMap : IEntityTypeConfiguration<FuncionarioCargo>
+    {
+        public void Configure(EntityTypeBuilder<FuncionarioCargo> builder)
+        {
+            builder.ToTable(nameof(FuncionarioCargo));
+
+            builder.HasKey(p =>new { p.FuncionarioId, p.CargoId});
+
+            builder.HasOne(p => p.Funcionario)
+                .WithMany(p => p.FuncionarioCargos)
+                .HasForeignKey(p => p.FuncionarioId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(p => p.Cargo)
+                .WithMany(p => p.FuncionarioCargos)
+                .HasForeignKey(p => p.CargoId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

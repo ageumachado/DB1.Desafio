@@ -2,13 +2,7 @@
 using DB1.Core.Mediator;
 using DB1.Core.Messages;
 using DB1.Desafio.Domain.Entities;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FluentValidation.Results;
 using DB1.Desafio.Infra.Extensions;
 
@@ -20,6 +14,7 @@ namespace DB1.Desafio.Infra.Data
         public DbSet<Empresa> Empresas { get; set; }
         public DbSet<Cargo> Cargos { get; set; }
         public DbSet<Funcionario> Funcionarios { get; set; }
+        public DbSet<FuncionarioCargo> FuncionarioCargos { get; set; }
         #endregion
 
         private readonly IMediatorHandler _mediatorHandler;
