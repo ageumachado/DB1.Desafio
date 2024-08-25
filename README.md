@@ -28,7 +28,7 @@ Solução desenvolvida utilizando Clean Architecture com as seguintes camadas:
 - `DB1.Core`: Biblioteca de utilidades
 - `DB1.WebApi.Core`: Biblioteca de utilidades para utilização na camada da API
 - `DB1.Desafio.Domain`: Camada de domínio com entidades e contratos de repositórios
-- `DB1.Desafio.Tests`: Camada de testes de unidade de domínio
+- `DB1.Desafio.Tests`: Camada de testes de unidade de domínio e aplicação
 - `DB1.Desafio.Infra`: Camada de implementação dos repositórios e conexões externas
 - `DB1.Desafio.Application`: Camada de implementação dos casos de uso e recursos de classes para request e response, classes de comunicação
 - `DB1.Desafio.Api`: Camada de implementação dos endpoins da api e documentação com swagger
