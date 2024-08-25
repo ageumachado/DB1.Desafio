@@ -2,16 +2,10 @@
 using DB1.Core.Communication;
 using DB1.Core.DomainObjects;
 using DB1.Core.Extensions;
-using DB1.Desafio.Domain.Entities;
 using DB1.Desafio.Domain.Repositories;
 
 namespace DB1.Desafio.Application.Commands.Funcionario.Editar
 {
-    public interface IEditarFuncionarioUseCase
-    {
-        Task<ResponseResult<EditarFuncionarioResponse>> ExecutarAsync(Guid id, EditarFuncionarioRequest request);
-    }
-
     public class EditarFuncionarioUseCase(
         IFuncionarioRepository funcionarioRepository,
         ICargoRepository cargoRepository,
@@ -61,7 +55,4 @@ namespace DB1.Desafio.Application.Commands.Funcionario.Editar
             return result.ToResponseResult(response);
         }
     }
-
-    public class EditarFuncionarioRequest : BaseFuncionario { }
-    public class EditarFuncionarioResponse : BaseFuncionario { }
 }

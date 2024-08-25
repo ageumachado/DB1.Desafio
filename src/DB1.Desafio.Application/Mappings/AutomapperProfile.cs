@@ -32,33 +32,18 @@ namespace DB1.Desafio.Application.Mappings
             #region Empresa
             CreateMap<CriarEmpresaRequest, Empresa>()
                 .ConstructUsing(p =>
-                    new Empresa(Guid.Empty, p.Nome, Cnpj.Parse(p.Cnpj!), p.DataFundacao, p.Ativo ? StatusEmpresa.Ativo : StatusEmpresa.Inativo));
-
-            CreateMap<Empresa, CriarEmpresaRequest>()
-                .ForMember(dest => dest.Ativo, opt =>
-                    opt.ConvertUsing(new EnumToBooleanConverter<StatusEmpresa>(StatusEmpresa.Ativo), src => src.Status));
-
-            CreateMap<Empresa, CriarEmpresaResponse>()
-                .ForMember(dest => dest.Ativo, opt =>
-                    opt.ConvertUsing(new EnumToBooleanConverter<StatusEmpresa>(StatusEmpresa.Ativo), src => src.Status));
-
+                    new Empresa(Guid.Empty, p.Nome, Cnpj.Parse(p.Cnpj!), p.DataFundacao, p.Status));
+            CreateMap<Empresa, CriarEmpresaRequest>();
+            CreateMap<Empresa, CriarEmpresaResponse>();
+                
             CreateMap<EditarEmpresaRequest, Empresa>()
                 .ConstructUsing(p =>
-                    new Empresa(p.Id, p.Nome, Cnpj.Parse(p.Cnpj!), p.DataFundacao, p.Ativo ? StatusEmpresa.Ativo : StatusEmpresa.Inativo));
+                    new Empresa(p.Id, p.Nome, Cnpj.Parse(p.Cnpj!), p.DataFundacao, p.Status));
+            CreateMap<Empresa, EditarEmpresaResponse>();
 
-            CreateMap<Empresa, EditarEmpresaResponse>()
-                .ForMember(dest => dest.Ativo, opt =>
-                    opt.ConvertUsing(new EnumToBooleanConverter<StatusEmpresa>(StatusEmpresa.Ativo), src => src.Status));
-
-            CreateMap<Empresa, ObterPorIdEmpresaResponse>()
-                .ForMember(dest => dest.Ativo,
-                    opt => opt.ConvertUsing(new EnumToBooleanConverter<StatusEmpresa>(StatusEmpresa.Ativo), src => src.Status));
+            CreateMap<Empresa, ObterPorIdEmpresaResponse>();
 
             CreateMap<Empresa, ObterTodosEmpresaResponse>();
-            //.ForMember(dest => dest.Ativo, opt =>
-            //    opt.Ignore());
-            //.ForMember(dest => dest.Ativo, 
-            //    opt => opt.ConvertUsing(new EnumToBooleanConverter<StatusEmpresa>(StatusEmpresa.Ativo), src => src.Status));
 
             CreateMap<Empresa, ObterComFiltroEmpresaResponse>();
             #endregion

@@ -6,11 +6,6 @@ using DB1.Desafio.Domain.Repositories;
 
 namespace DB1.Desafio.Application.Commands.Funcionario.ObterPorId
 {
-    public interface IObterPorIdFuncionarioUseCase
-    {
-        Task<ResponseResult<ObterPorIdFuncionarioResponse>> ExecutarAsync(Guid id);
-    }
-
     public class ObterPorIdFuncionarioUseCase(
         IFuncionarioRepository funcionarioRepository,
         IMapper mapper) : CommandUseCase, IObterPorIdFuncionarioUseCase
@@ -27,6 +22,4 @@ namespace DB1.Desafio.Application.Commands.Funcionario.ObterPorId
             return result.ToResponseResult();
         }
     }
-
-    public class ObterPorIdFuncionarioResponse : BaseFuncionario { }
 }

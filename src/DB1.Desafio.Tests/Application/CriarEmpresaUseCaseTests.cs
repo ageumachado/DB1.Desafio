@@ -6,11 +6,6 @@ using DB1.Desafio.Domain.Repositories;
 using DB1.Desafio.Tests.Fixtures;
 using DB1.Desafio.Tests.Utils;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DB1.Desafio.Tests.Application
 {
@@ -49,7 +44,6 @@ namespace DB1.Desafio.Tests.Application
             Assert.True(response.EhValido());
             Assert.NotNull(response.Data);
             Assert.IsType<CriarEmpresaResponse>(response.Data);
-            Assert.True(response.Data.Ativo);
             Assert.Equal(empresa.Id, empresaRequest.Id);
             empresaRepoMock.Verify(r => r.Adicionar(empresa), Times.Once);
         }

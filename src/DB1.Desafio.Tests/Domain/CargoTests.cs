@@ -1,5 +1,6 @@
 ﻿using DB1.Desafio.Domain.Entities;
 using DB1.Desafio.Domain.Enums;
+using DB1.Desafio.Domain.Validators;
 using DB1.Desafio.Tests.Fixtures;
 using DB1.Desafio.Tests.Utils;
 

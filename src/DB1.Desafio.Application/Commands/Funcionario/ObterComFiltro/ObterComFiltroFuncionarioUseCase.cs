@@ -9,11 +9,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DB1.Desafio.Application.Commands.Funcionario.ObterComFiltro
 {
-    public interface IObterComFiltroFuncionarioUseCase
-    {
-        Task<ResponseResult<IEnumerable<ObterComFiltroFuncionarioResponse>>> ExecutarAsync(FuncionarioFiltro filtro);
-    }
-
     public class ObterComFiltroFuncionarioUseCase(
         IFuncionarioRepository funcionarioRepository,
         IMapper mapper) : CommandUseCase, IObterComFiltroFuncionarioUseCase
@@ -32,16 +27,5 @@ namespace DB1.Desafio.Application.Commands.Funcionario.ObterComFiltro
                     .ProjectTo<ObterComFiltroFuncionarioResponse>(mapper.ConfigurationProvider));
             return response.ToResponseResult();
         }
-    }
-
-    public class ObterComFiltroFuncionarioResponse
-    {
-        public Guid Id { get; set; }
-        public string? Nome { get; set; }
-        public string? Cpf { get; set; }
-        public DateTime DataContratacao { get; set; }
-        public string Status { get; set; }
-        public string EmpresaNome { get; set; }
-        public string? CargoNome { get; set; }
     }
 }

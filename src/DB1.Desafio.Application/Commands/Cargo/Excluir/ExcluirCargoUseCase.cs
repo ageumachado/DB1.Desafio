@@ -5,11 +5,6 @@ using DB1.Desafio.Domain.Repositories;
 
 namespace DB1.Desafio.Application.Commands.Cargo.Excluir
 {
-    public interface IExcluirCargoUseCase
-    {
-        Task<ResponseResult> ExecutarAsync(Guid id);
-    }
-
     internal class ExcluirCargoUseCase(
         ICargoRepository cargoRepository) : CommandUseCase, IExcluirCargoUseCase
     {

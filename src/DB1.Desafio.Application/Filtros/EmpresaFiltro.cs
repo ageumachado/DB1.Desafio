@@ -1,6 +1,4 @@
-﻿using AspNetCore.IQueryable.Extensions;
-
-namespace DB1.Desafio.Application.Filtros
+﻿namespace DB1.Desafio.Application.Filtros
 {
     public class EmpresaFiltro
     {

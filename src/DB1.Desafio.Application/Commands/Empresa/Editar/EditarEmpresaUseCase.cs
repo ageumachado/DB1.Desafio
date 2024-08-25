@@ -6,11 +6,6 @@ using DB1.Desafio.Domain.Repositories;
 
 namespace DB1.Desafio.Application.Commands.Empresa.Editar
 {
-    public interface IEditarEmpresaUseCase
-    {
-        Task<ResponseResult<EditarEmpresaResponse>> ExecutarAsync(Guid id, EditarEmpresaRequest request); 
-    }
-
     public class EditarEmpresaUseCase(
         IEmpresaRepository empresaRepository,
         IMapper mapper) : CommandUseCase, IEditarEmpresaUseCase
@@ -41,8 +36,4 @@ namespace DB1.Desafio.Application.Commands.Empresa.Editar
             return result.ToResponseResult(response);
         }
     }
-
-    public class EditarEmpresaRequest : BaseEmpresa { }
-    public class EditarEmpresaResponse : BaseEmpresa { }
-         
 }

@@ -6,11 +6,6 @@ using DB1.Desafio.Domain.Repositories;
 
 namespace DB1.Desafio.Application.Commands.Cargo.ObterPorId
 {
-    public interface IObterPorIdCargoUseCase
-    {
-        Task<ResponseResult<ObterPorIdCargoResponse>> ExecutarAsync(Guid id);
-    }
-
     internal class ObterPorIdCargoUseCase(
         ICargoRepository cargoRepository,
         IMapper mapper) : CommandUseCase, IObterPorIdCargoUseCase
@@ -26,10 +21,5 @@ namespace DB1.Desafio.Application.Commands.Cargo.ObterPorId
             var result = mapper.Map<ObterPorIdCargoResponse>(entidade);
             return result.ToResponseResult();
         }
-    }
-
-    public class ObterPorIdCargoResponse : BaseCargo 
-    {
-        public Guid Id { get; set; }
     }
 }

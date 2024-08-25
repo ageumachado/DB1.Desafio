@@ -6,11 +6,6 @@ using DB1.Desafio.Domain.Repositories;
 
 namespace DB1.Desafio.Application.Commands.Empresa.ObterPorId
 {
-    public interface IObterPorIdEmpresaUseCase
-    {
-        Task<ResponseResult<ObterPorIdEmpresaResponse>> ExecutarAsync(Guid id);
-    }
-
     public class ObterPorIdEmpresaUseCase(
         IEmpresaRepository empresaRepository,
         IMapper mapper) : CommandUseCase, IObterPorIdEmpresaUseCase
@@ -27,6 +22,4 @@ namespace DB1.Desafio.Application.Commands.Empresa.ObterPorId
             return result.ToResponseResult();
         }
     }
-
-    public class ObterPorIdEmpresaResponse : BaseEmpresa { }
 }

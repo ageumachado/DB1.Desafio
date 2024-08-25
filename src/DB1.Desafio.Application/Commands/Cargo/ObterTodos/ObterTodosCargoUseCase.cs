@@ -7,11 +7,6 @@ using DB1.Desafio.Domain.Repositories;
 
 namespace DB1.Desafio.Application.Commands.Cargo.ObterTodos
 {
-    public interface IObterTodosCargoUseCase
-    {
-        Task<ResponseResult<IEnumerable<ObterComFiltroCargoResponse>>> ExecutarAsync();
-    }
-
     internal class ObterTodosCargoUseCase(
         ICargoRepository cargoRepository,
         IMapper mapper) : CommandUseCase, IObterTodosCargoUseCase
@@ -23,12 +18,5 @@ namespace DB1.Desafio.Application.Commands.Cargo.ObterTodos
                     p.ProjectTo<ObterComFiltroCargoResponse>(mapper.ConfigurationProvider));
             return response.ToResponseResult();
         }
-    }
-
-    public class ObterComFiltroCargoResponse
-    {
-        public Guid Id { get; set; }
-        public string? Nome { get; set; }
-        public string Status { get; set; }
     }
 }

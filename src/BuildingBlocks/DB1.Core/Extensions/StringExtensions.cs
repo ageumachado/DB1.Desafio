@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DB1.Core.Extensions
+﻿namespace DB1.Core.Extensions
 {
     public static class StringExtensions
     {

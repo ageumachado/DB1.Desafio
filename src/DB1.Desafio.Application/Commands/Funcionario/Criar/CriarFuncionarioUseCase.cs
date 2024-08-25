@@ -6,11 +6,6 @@ using DB1.Desafio.Domain.Repositories;
 
 namespace DB1.Desafio.Application.Commands.Funcionario.Criar
 {
-    public interface ICriarFuncionarioUseCase
-    {
-        Task<ResponseResult<CriarFuncionarioResponse>> ExecutarAsync(CriarFuncionarioRequest request);
-    }
-
     public class CriarFuncionarioUseCase(
         IFuncionarioRepository funcionarioRepository,
         ICargoRepository cargoRepository,
@@ -52,11 +47,5 @@ namespace DB1.Desafio.Application.Commands.Funcionario.Criar
             response.CargoId = request.CargoId;
             return result.ToResponseResult(response);
         }
-    }
-
-    public class CriarFuncionarioRequest : BaseFuncionario { }
-    public class CriarFuncionarioResponse : BaseFuncionario
-    {
-        public Guid Id { get; set; }
     }
 }

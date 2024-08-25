@@ -5,11 +5,6 @@ using DB1.Desafio.Domain.Repositories;
 
 namespace DB1.Desafio.Application.Commands.Funcionario.Excluir
 {
-    public interface IExcluirFuncionarioUseCase
-    {
-        Task<ResponseResult> ExecutarAsync(Guid id);
-    }
-
     public class ExcluirFuncionarioUseCase(
         IFuncionarioRepository funcionarioRepository) : CommandUseCase, IExcluirFuncionarioUseCase
     {

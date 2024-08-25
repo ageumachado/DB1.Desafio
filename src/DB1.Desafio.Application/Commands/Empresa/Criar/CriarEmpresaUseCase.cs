@@ -6,11 +6,6 @@ using DB1.Desafio.Domain.Repositories;
 
 namespace DB1.Desafio.Application.Commands.Empresa.Criar
 {
-    public interface ICriarEmpresaUseCase
-    {
-        Task<ResponseResult<CriarEmpresaResponse>> ExecutarAsync(CriarEmpresaRequest request);
-    }
-
     public class CriarEmpresaUseCase(
         IEmpresaRepository empresaRepository,
         IMapper mapper) : CommandUseCase, ICriarEmpresaUseCase
@@ -40,7 +35,4 @@ namespace DB1.Desafio.Application.Commands.Empresa.Criar
             return result.ToResponseResult(response);
         }
     }
-
-    public class CriarEmpresaRequest : BaseEmpresa { }
-    public class CriarEmpresaResponse : BaseEmpresa { }
 }

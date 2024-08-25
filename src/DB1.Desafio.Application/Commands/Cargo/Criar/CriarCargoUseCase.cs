@@ -6,11 +6,6 @@ using DB1.Desafio.Domain.Repositories;
 
 namespace DB1.Desafio.Application.Commands.Cargo.Criar
 {
-    public interface ICriarCargoUseCase
-    {
-        Task<ResponseResult<CriarCargoResponse>> ExecutarAsync(CriarCargoRequest request);
-    }
-
     internal class CriarCargoUseCase(
         ICargoRepository cargoRepository,
         IMapper mapper) : CommandUseCase, ICriarCargoUseCase
@@ -36,11 +31,5 @@ namespace DB1.Desafio.Application.Commands.Cargo.Criar
             var response = mapper.Map<CriarCargoResponse>(entidade);
             return result.ToResponseResult(response);
         }
-    }
-
-    public class CriarCargoRequest : BaseCargo { }
-    public class CriarCargoResponse: BaseCargo 
-    {
-        public Guid Id { get; set; }
     }
 }

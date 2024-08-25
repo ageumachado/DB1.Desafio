@@ -1,6 +1,6 @@
 ﻿using DB1.Core.DomainObjects;
 using DB1.Desafio.Domain.Enums;
-using FluentValidation;
+using DB1.Desafio.Domain.Validators;
 
 namespace DB1.Desafio.Domain.Entities
 {
@@ -11,7 +11,6 @@ namespace DB1.Desafio.Domain.Entities
 
         // EF
         protected Cargo() { }
-
 
         public Cargo(string nome)
         {
@@ -26,17 +25,5 @@ namespace DB1.Desafio.Domain.Entities
         public void Ativar() => Status = Status.Ativo;
         public void Inativar() => Status = Status.Inativo;
         public void Remover() => Status = Status.Removido;
-    }
-
-    public class CargoValidator : AbstractValidator<Cargo>
-    {
-        public static readonly int NOME_MAX_LENGTH = 150;
-
-        public CargoValidator()
-        {
-            RuleFor(a => a.Nome)
-                .NotEmpty().WithMessage("Informe o nome")
-                .MaximumLength(NOME_MAX_LENGTH).WithMessage("Quantidade máxima de caracteres é de {MaxLength}");
-        }
     }
 }

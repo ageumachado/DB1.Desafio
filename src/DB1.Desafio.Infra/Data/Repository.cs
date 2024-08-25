@@ -13,39 +13,46 @@ namespace DB1.Desafio.Infra.Data
         protected readonly Db1DataContext Context;
 
         public IUnitOfWork UnitOfWork => Context;
-
+                
         protected Repository(Db1DataContext context)
         {
             Context = context;
             dbSet = Context.Set<TEntity>();
         }
 
+        /// <inheritdoc/>
         protected IQueryable<TEntity> ObterQuery() =>
             dbSet.AsQueryable();
 
+        /// <inheritdoc/>
         protected IQueryable<TEntitySet> ObterQuery<TEntitySet>() where TEntitySet : class
             => Context.Set<TEntitySet>().AsQueryable();
 
+        /// <inheritdoc/>
         public virtual void Adicionar(TEntity obj)
         {
             dbSet.Add(obj);
         }
 
+        /// <inheritdoc/>
         protected void Adicionar<TEntitySet>(TEntitySet entity) where TEntitySet : class
         {
             Context.Set<TEntitySet>().Add(entity);
         }
 
+        /// <inheritdoc/>
         protected void AdicionarRange<TEntitySet>(params TEntitySet[] entity) where TEntitySet : class
         {
             Context.Set<TEntitySet>().AddRange(entity);
         }
 
+        /// <inheritdoc/>
         public void Adicionar(IEnumerable<TEntity> objs)
         {
             dbSet.AddRange(objs);
         }
 
+        /// <inheritdoc/>
         public async void Remover(Guid id)
         {
             var entity = await dbSet.FindAsync(id);
@@ -53,26 +60,31 @@ namespace DB1.Desafio.Infra.Data
                 dbSet.Remove(entity);
         }
 
+        /// <inheritdoc/>
         public void Remover(TEntity obj)
         {
             dbSet.Remove(obj);
         }
 
+        /// <inheritdoc/>
         protected void Remover<TEntitySet>(TEntitySet entity) where TEntitySet : class
         {
             Context.Set<TEntitySet>().Remove(entity);
         }
 
+        /// <inheritdoc/>
         protected void RemoverRange<TEntitySet>(params TEntitySet[] entity) where TEntitySet : class
         {
             Context.Set<TEntitySet>().RemoveRange(entity);
         }
 
+        /// <inheritdoc/>
         public void Remover(IEnumerable<TEntity> objs)
         {
             dbSet.RemoveRange(objs);
         }
 
+        /// <inheritdoc/>
         public virtual void Editar(TEntity obj)
         {
             dbSet.Update(obj);
@@ -83,17 +95,19 @@ namespace DB1.Desafio.Infra.Data
             Context.Set<TEntitySet>().Update(entity);
         }
 
+        /// <inheritdoc/>
         public virtual async Task<bool> ExisteAsync(Expression<Func<TEntity, bool>> where)
         {
             return await dbSet.AnyAsync(where);
         }
 
+        /// <inheritdoc/>
         public virtual async Task<IEnumerable<TEntity>> ObterListaAsync()
         {
             return await dbSet.AsNoTrackingWithIdentityResolution().ToListAsync();
         }
 
-
+        /// <inheritdoc/>
         public virtual async Task<IEnumerable<TEntity>> ObterListaAsync(Expression<Func<TEntity, bool>> where)
         {
             return await ObterQuery()
@@ -110,6 +124,7 @@ namespace DB1.Desafio.Infra.Data
             return await predicate.Invoke(query).FirstOrDefaultAsync() ?? default;
         }
 
+        /// <inheritdoc/>
         public async Task<TResult?> ObterUnicoComFiltroEhSelecaoAsync<TResult>
             (Expression<Func<TEntity, bool>> expression,
             Expression<Func<TEntity, TResult>> select) where TResult : class
@@ -128,6 +143,7 @@ namespace DB1.Desafio.Infra.Data
             return await predicate.Invoke(query).ToListAsync();
         }
 
+        /// <inheritdoc/>
         public virtual async Task<IEnumerable<TEntity>> ObterListaEhOrdenarAsync<TKey>(Expression<Func<TEntity, TKey>> order)
         {
             return await ObterQuery()
@@ -136,6 +152,7 @@ namespace DB1.Desafio.Infra.Data
                 .ToListAsync();
         }
 
+        /// <inheritdoc/>
         public virtual async Task<IEnumerable<TEntity>> ObterListaAsync<TKey>(Expression<Func<TEntity, bool>> where, Expression<Func<TEntity, TKey>> order)
         {
             return await ObterQuery()
@@ -145,30 +162,18 @@ namespace DB1.Desafio.Infra.Data
                 .ToListAsync();
         }
 
+        /// <inheritdoc/>
         public async ValueTask<TEntity?> ObterPorIdAsync(params object[]? keyValues)
         {
             return await dbSet.FindAsync(keyValues);
         }
 
+        /// <inheritdoc/>
         public virtual async Task<TEntity?> ObterUnicoAsync(Expression<Func<TEntity, bool>> expression)
         {
             return await ObterQuery()
                 .FirstOrDefaultAsync(expression);
         }
-
-        //public async Task<TDestination?> ObterUnicoAsync<TDestination>(Func<IQueryable<TEntity>, IQueryable<TDestination>> predicate)
-        //{
-        //    var query = ObterQuery().AsNoTrackingWithIdentityResolution();
-        //    return await predicate.Invoke(query).FirstOrDefaultAsync();
-        //}
-
-        //public async Task<TDestination> ObterPorIdAsync<TDestination, TProperty>
-        //    (Func<IIncludableQueryable<TEntity, TProperty>, IQueryable<TDestination>> predicate)
-        //{
-        //    var query = ObterQuery().AsNoTrackingWithIdentityResolution().Include;
-        //    return await predicate.Invoke(query).ToListAsync();
-        //}
-
 
         #region IDisposable Support
         private bool disposedValue;
@@ -186,7 +191,6 @@ namespace DB1.Desafio.Infra.Data
         /// <inheritdoc/>
         public void Dispose()
         {
-            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
             Dispose(disposing: true);
             GC.SuppressFinalize(this);
         }

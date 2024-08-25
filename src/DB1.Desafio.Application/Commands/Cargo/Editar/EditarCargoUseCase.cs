@@ -6,11 +6,6 @@ using DB1.Desafio.Domain.Repositories;
 
 namespace DB1.Desafio.Application.Commands.Cargo.Editar
 {
-    public interface IEditarCargoUseCase
-    {
-        Task<ResponseResult<EditarCargoResponse>> ExecutarAsync(Guid id, EditarCargoRequest request);
-    }
-
     internal class EditarCargoUseCase(
         ICargoRepository cargoRepository,
         IMapper mapper) : CommandUseCase, IEditarCargoUseCase
@@ -37,15 +32,5 @@ namespace DB1.Desafio.Application.Commands.Cargo.Editar
             var response = mapper.Map<EditarCargoResponse>(entidade);
             return result.ToResponseResult(response);
         }
-    }
-
-    public class EditarCargoRequest : BaseCargo
-    {
-        public Guid Id { get; set; }
-    }
-
-    public class EditarCargoResponse : BaseCargo
-    {
-        public Guid Id { get; set; }
     }
 }
