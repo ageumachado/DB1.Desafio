@@ -7,11 +7,6 @@ using DB1.Desafio.Domain.Repositories;
 using DB1.Desafio.Tests.Fixtures;
 using DB1.Desafio.Tests.Utils;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DB1.Desafio.Tests.Application
 {
@@ -69,7 +64,6 @@ namespace DB1.Desafio.Tests.Application
             var funcionarioRequest = mapper.Map<CriarFuncionarioRequest>(funcionario);
             funcionarioRequest.EmpresaId = null;
             funcionarioRequest.CargoId = Guid.NewGuid();
-            var cargo = cargoRepoMock.Object.ObterPorIdAsync(funcionarioRequest.CargoId);
 
             // Act
             var response = await funcionarioUseCase.ExecutarAsync(funcionarioRequest);
@@ -82,7 +76,7 @@ namespace DB1.Desafio.Tests.Application
             funcionarioRepoMock.Verify(r => r.Adicionar(funcionario), Times.Once);
         }
 
-        [Fact(DisplayName = "Novo funcionario sem empresa e com cargo, não vincular cargo")]
+        [Fact(DisplayName = "Novo funcionario com empresa e com cargo, não vincular cargo")]
         [Trait("Funcionario", "UseCase - Criar")]
         public async Task FuncionarioUseCase_NovoFuncionarioComEmpresaComCargo_VincularCargo()
         {
