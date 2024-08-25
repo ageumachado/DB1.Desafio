@@ -37,7 +37,7 @@ Solução desenvolvida utilizando Clean Architecture com as seguintes camadas:
 Você pode abrir o projeto acessando https://github.com/ageumachado/DB1.Desafio
 
 # 🛠️ Abrir e rodar o projeto
-**Após baixar o projeto, abra no visual studio 2022 e siga as intruções abaixo**
+**Após baixar o projeto, abra no visual studio 2022 e siga as intruções abaixo:**
 - Execute a limpeza da solução
 - Compile a solução
 - Insira a string de conexão do seu servidor de banco de dados no arquivo appsettings.Development
