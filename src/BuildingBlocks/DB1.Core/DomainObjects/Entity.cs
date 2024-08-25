@@ -1,13 +1,8 @@
 ﻿using DB1.Core.Messages;
 using FluentValidation;
 using FluentValidation.Results;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Principal;
-using System.Text;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace DB1.Core.DomainObjects
 {
@@ -98,7 +93,12 @@ namespace DB1.Core.DomainObjects
 
     public abstract class BaseEntity
     {
+        [JsonIgnore]
+        [NotMapped]
         public bool Valid { get; private set; }
+
+        [JsonIgnore]
+        [NotMapped]
         public bool Invalid => !Valid;
         public ValidationResult ValidationResult { get; private set; }
 

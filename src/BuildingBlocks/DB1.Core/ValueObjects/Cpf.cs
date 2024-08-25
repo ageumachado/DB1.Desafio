@@ -13,7 +13,7 @@ namespace DB1.Core.ValueObjects
         // Obrigatório para funcionar com EF
         protected Cpf() { }
 
-        private Cpf(string cpfCnpj)
+        public Cpf(string cpfCnpj)
         {
             //_cpfCnpj = cpfCnpj;
             Numero = cpfCnpj;
