@@ -3,11 +3,6 @@ using DB1.Core.Communication;
 using DB1.Core.DomainObjects;
 using DB1.Core.Extensions;
 using DB1.Desafio.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DB1.Desafio.Application.Commands.Empresa.ObterPorId
 {
@@ -22,7 +17,13 @@ namespace DB1.Desafio.Application.Commands.Empresa.ObterPorId
     {
         public async Task<ResponseResult<ObterPorIdEmpresaResponse>> ExecutarAsync(Guid id)
         {
-            var result = mapper.Map<ObterPorIdEmpresaResponse>(await empresaRepository.ObterPorIdAsync(id));
+            if (id == Guid.Empty) return ResponseResultError("Informe o ID corretamente");
+
+            var entidade = await empresaRepository.ObterPorIdAsync(id);
+
+            if (entidade is null) return ResponseResultError("Registro não encontrado");
+
+            var result = mapper.Map<ObterPorIdEmpresaResponse>(entidade);
             return result.ToResponseResult();
         }
     }

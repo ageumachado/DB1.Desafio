@@ -1,4 +1,9 @@
 ﻿using DB1.Core.Mediator;
+using DB1.Desafio.Application.Commands.Cargo.Criar;
+using DB1.Desafio.Application.Commands.Cargo.Editar;
+using DB1.Desafio.Application.Commands.Cargo.Excluir;
+using DB1.Desafio.Application.Commands.Cargo.ObterPorId;
+using DB1.Desafio.Application.Commands.Cargo.ObterTodos;
 using DB1.Desafio.Application.Commands.Empresa.Criar;
 using DB1.Desafio.Application.Commands.Empresa.Editar;
 using DB1.Desafio.Application.Commands.Empresa.Excluir;
@@ -20,6 +25,15 @@ namespace DB1.Desafio.Application
             #endregion
 
             services
+
+            #region Cargo
+                 .AddScoped<ICriarCargoUseCase, CriarCargoUseCase>()
+                 .AddScoped<IEditarCargoUseCase, EditarCargoUseCase>()
+                 .AddScoped<IExcluirCargoUseCase, ExcluirCargoUseCase>()
+                 .AddScoped<IObterPorIdCargoUseCase, ObterPorIdCargoUseCase>()
+                 .AddScoped<IObterTodosCargoUseCase, ObterTodosCargoUseCase>()
+            #endregion
+
             #region Empresa
                 .AddScoped<ICriarEmpresaUseCase, CriarEmpresaUseCase>()
                 .AddScoped<IEditarEmpresaUseCase, EditarEmpresaUseCase>()

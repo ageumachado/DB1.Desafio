@@ -1,5 +1,9 @@
 ﻿using AutoMapper;
 using DB1.Core.ValueObjects;
+using DB1.Desafio.Application.Commands.Cargo.Criar;
+using DB1.Desafio.Application.Commands.Cargo.Editar;
+using DB1.Desafio.Application.Commands.Cargo.ObterPorId;
+using DB1.Desafio.Application.Commands.Cargo.ObterTodos;
 using DB1.Desafio.Application.Commands.Empresa.Criar;
 using DB1.Desafio.Application.Commands.Empresa.Editar;
 using DB1.Desafio.Application.Commands.Empresa.ObterComFiltro;
@@ -21,8 +25,6 @@ namespace DB1.Desafio.Application.Mappings
         private void Mappings()
         {
             #region Empresa
-
-
             CreateMap<CriarEmpresaRequest, Empresa>()
                 .ConstructUsing(p =>
                     new Empresa(Guid.Empty, p.Nome, Cnpj.Parse(p.Cnpj!), p.DataFundacao, p.Ativo ? StatusEmpresa.Ativo : StatusEmpresa.Inativo));
@@ -54,6 +56,21 @@ namespace DB1.Desafio.Application.Mappings
             //    opt => opt.ConvertUsing(new EnumToBooleanConverter<StatusEmpresa>(StatusEmpresa.Ativo), src => src.Status));
 
             CreateMap<Empresa, ObterComFiltroEmpresaResponse>();
+            #endregion
+
+            #region Cargo
+            CreateMap<CriarCargoRequest, Cargo>();
+            CreateMap<Cargo, CriarCargoResponse>();
+
+            CreateMap<EditarCargoRequest, Cargo>();
+            CreateMap<Cargo, EditarCargoResponse>();
+
+            CreateMap<Cargo, ObterPorIdCargoResponse>();
+
+            CreateMap<Cargo, ObterTodosCargoResponse>();
+            #endregion
+
+            #region Funcionario
 
             #endregion
         }
