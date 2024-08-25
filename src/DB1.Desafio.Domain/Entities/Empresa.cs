@@ -47,7 +47,6 @@ namespace DB1.Desafio.Domain.Entities
             RuleFor(a => a.Cnpj.Numero)
                 .NotNull().WithMessage("Informe o CNPJ")
                 .Length(CNPJ_LENGTH).WithMessage($"Tamanho deve ser {CNPJ_LENGTH}");
-                //.IsCnpj().WithMessage("CNPJ inválido");
 
             RuleFor(a => a.DataFundacao)
                 .NotNull().WithMessage("Informe a data da fundação")

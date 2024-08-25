@@ -1,4 +1,5 @@
 ﻿using DB1.Core.DomainObjects;
+using DB1.Core.ValueObjects;
 using DB1.Desafio.Domain.Enums;
 using FluentValidation;
 
@@ -7,11 +8,14 @@ namespace DB1.Desafio.Domain.Entities
     public class Funcionario : Entity, IAggregateRoot
     {
         public string Nome { get; private set; }
-        public string Cpf { get; private set; }
+        public Cpf Cpf { get; private set; }
         public DateTime DataContratacao { get; private set; }
         public Status Status { get; private set; }
 
-        public Funcionario(string nome, string cpf, DateTime dataContratacao)
+        // EF
+        protected Funcionario() { }
+
+        public Funcionario(string nome, Cpf cpf, DateTime dataContratacao)
         {
             Nome = nome;
             Cpf = cpf;
@@ -21,20 +25,17 @@ namespace DB1.Desafio.Domain.Entities
             Validate(this, new FuncionarioValidator());
         }
 
+        public Guid? EmpresaId { get; private set; }
+        public Empresa? Empresa { get; private set; }
 
-        public Guid EmpresaId { get; private set; }
-        public Empresa Empresa { get; private set; }
+        private List<FuncionarioCargo>? _funcionarioCargos;
+        public IReadOnlyCollection<FuncionarioCargo> FuncionarioCargos => _funcionarioCargos ?? [];
 
-        private List<Cargo>? _cargos;
-        public IReadOnlyCollection<Cargo> Cargos => _cargos ?? [];
-
-        public void AdicionarCargo(params Cargo[] cargos)
+        public void AdicionarCargo(params FuncionarioCargo[] funcionarioCargos)
         {
-            _cargos ??= [];
-            _cargos.AddRange(cargos);
+            _funcionarioCargos ??= [];
+            _funcionarioCargos.AddRange(funcionarioCargos);
         }
-        public void LimparCargos() => _cargos?.Clear();
-
 
         public void Ativar() => Status = Status.Ativo;
         public void Inativar() => Status = Status.Inativo;
@@ -52,7 +53,7 @@ namespace DB1.Desafio.Domain.Entities
                 .NotEmpty().WithMessage("Informe o nome")
                 .MaximumLength(NOME_MAX_LENGTH).WithMessage("Quantidade máxima de caracteres é de {MaxLength}");
 
-            RuleFor(a => a.Cpf)
+            RuleFor(a => a.Cpf.Numero)
                 .NotNull().WithMessage("Informe o CPF")
                 .Length(CPF_LENGTH).WithMessage($"Tamanho deve ser {CPF_LENGTH}");
 

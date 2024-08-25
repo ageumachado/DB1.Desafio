@@ -9,6 +9,10 @@ namespace DB1.Desafio.Domain.Entities
         public string Nome { get; private set; }
         public Status Status { get; private set; }
 
+        // EF
+        protected Cargo() { }
+
+
         public Cargo(string nome)
         {
             Nome = nome;
@@ -17,7 +21,7 @@ namespace DB1.Desafio.Domain.Entities
             Validate(this, new CargoValidator());
         }
 
-        public ICollection<Funcionario>? Funcionarios { get; set; }
+        public ICollection<FuncionarioCargo>? FuncionarioCargos { get; set; }
 
         public void Ativar() => Status = Status.Ativo;
         public void Inativar() => Status = Status.Inativo;
