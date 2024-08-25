@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using DB1.Core.Data;
-using DB1.Desafio.Application.Commands.Funcionario.Criar;
 using DB1.Desafio.Application.Commands.Funcionario.Editar;
 using DB1.Desafio.Application.Mappings;
 using DB1.Desafio.Domain.Entities;
@@ -8,11 +7,6 @@ using DB1.Desafio.Domain.Repositories;
 using DB1.Desafio.Tests.Fixtures;
 using DB1.Desafio.Tests.Utils;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DB1.Desafio.Tests.Application
 {
