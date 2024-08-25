@@ -10,6 +10,12 @@ using DB1.Desafio.Application.Commands.Empresa.Excluir;
 using DB1.Desafio.Application.Commands.Empresa.ObterComFiltro;
 using DB1.Desafio.Application.Commands.Empresa.ObterPorId;
 using DB1.Desafio.Application.Commands.Empresa.ObterTodos;
+using DB1.Desafio.Application.Commands.Funcionario.Criar;
+using DB1.Desafio.Application.Commands.Funcionario.Editar;
+using DB1.Desafio.Application.Commands.Funcionario.Excluir;
+using DB1.Desafio.Application.Commands.Funcionario.ObterComFiltro;
+using DB1.Desafio.Application.Commands.Funcionario.ObterPorId;
+using DB1.Desafio.Application.Commands.Funcionario.ObterTodos;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
@@ -32,6 +38,15 @@ namespace DB1.Desafio.Application
                  .AddScoped<IExcluirCargoUseCase, ExcluirCargoUseCase>()
                  .AddScoped<IObterPorIdCargoUseCase, ObterPorIdCargoUseCase>()
                  .AddScoped<IObterTodosCargoUseCase, ObterTodosCargoUseCase>()
+            #endregion
+
+            #region Funcionario
+                .AddScoped<ICriarFuncionarioUseCase, CriarFuncionarioUseCase>()
+                .AddScoped<IEditarFuncionarioUseCase, EditarFuncionarioUseCase>()
+                .AddScoped<IObterPorIdFuncionarioUseCase, ObterPorIdFuncionarioUseCase>()
+                .AddScoped<IObterTodosFuncionarioUseCase, ObterTodosFuncionarioUseCase>()
+                .AddScoped<IObterComFiltroFuncionarioUseCase, ObterComFiltroFuncionarioUseCase>()
+                .AddScoped<IExcluirFuncionarioUseCase, ExcluirFuncionarioUseCase>()
             #endregion
 
             #region Empresa

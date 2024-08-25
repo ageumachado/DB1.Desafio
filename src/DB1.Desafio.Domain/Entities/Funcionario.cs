@@ -28,14 +28,10 @@ namespace DB1.Desafio.Domain.Entities
         public Guid? EmpresaId { get; private set; }
         public Empresa? Empresa { get; private set; }
 
+        public void AdicionarEmpresa(Guid? empresaId) => EmpresaId = empresaId;
+
         private List<FuncionarioCargo>? _funcionarioCargos;
         public IReadOnlyCollection<FuncionarioCargo> FuncionarioCargos => _funcionarioCargos ?? [];
-
-        public void AdicionarCargo(params FuncionarioCargo[] funcionarioCargos)
-        {
-            _funcionarioCargos ??= [];
-            _funcionarioCargos.AddRange(funcionarioCargos);
-        }
 
         public void Ativar() => Status = Status.Ativo;
         public void Inativar() => Status = Status.Inativo;

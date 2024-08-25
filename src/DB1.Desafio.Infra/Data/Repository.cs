@@ -31,12 +31,12 @@ namespace DB1.Desafio.Infra.Data
             dbSet.Add(obj);
         }
 
-        protected void Adicionar<TEntitySet>(TEntitySet entity) where TEntitySet : Entity
+        protected void Adicionar<TEntitySet>(TEntitySet entity) where TEntitySet : class
         {
             Context.Set<TEntitySet>().Add(entity);
         }
 
-        protected void AdicionarRange<TEntitySet>(params TEntitySet[] entity) where TEntitySet : Entity
+        protected void AdicionarRange<TEntitySet>(params TEntitySet[] entity) where TEntitySet : class
         {
             Context.Set<TEntitySet>().AddRange(entity);
         }
@@ -58,12 +58,12 @@ namespace DB1.Desafio.Infra.Data
             dbSet.Remove(obj);
         }
 
-        protected void Remover<TEntitySet>(TEntitySet entity) where TEntitySet : Entity
+        protected void Remover<TEntitySet>(TEntitySet entity) where TEntitySet : class
         {
             Context.Set<TEntitySet>().Remove(entity);
         }
 
-        protected void RemoverRange<TEntitySet>(params TEntitySet[] entity) where TEntitySet : Entity
+        protected void RemoverRange<TEntitySet>(params TEntitySet[] entity) where TEntitySet : class
         {
             Context.Set<TEntitySet>().RemoveRange(entity);
         }

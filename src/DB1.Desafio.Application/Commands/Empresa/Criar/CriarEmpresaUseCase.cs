@@ -8,27 +8,27 @@ namespace DB1.Desafio.Application.Commands.Empresa.Criar
 {
     public interface ICriarEmpresaUseCase
     {
-        Task<ResponseResult<CriarEmpresaResponse>> ExecutarAsync(CriarEmpresaRequest message);
+        Task<ResponseResult<CriarEmpresaResponse>> ExecutarAsync(CriarEmpresaRequest request);
     }
 
     public class CriarEmpresaUseCase(
         IEmpresaRepository empresaRepository,
         IMapper mapper) : CommandUseCase, ICriarEmpresaUseCase
     {
-        public async Task<ResponseResult<CriarEmpresaResponse>> ExecutarAsync(CriarEmpresaRequest message)
+        public async Task<ResponseResult<CriarEmpresaResponse>> ExecutarAsync(CriarEmpresaRequest request)
         {
-            if (message is null) return ResponseResultError("Requisição não recebida");
+            if (request is null) return ResponseResultError("Requisição não recebida");
 
-            message.Cnpj = message.Cnpj?.ApenasNumeros();
-            message.DataFundacao = message.DataFundacao.Date;
+            request.Cnpj = request.Cnpj?.ApenasNumeros();
+            request.DataFundacao = request.DataFundacao.Date;
 
-            if (message.EhInvalido()) return message.ToResponseResultError();
+            if (request.EhInvalido()) return request.ToResponseResultError();
 
             if (await empresaRepository
-                .ExisteAsync(p => p.Cnpj.Numero == message.Cnpj!))
+                .ExisteAsync(p => p.Cnpj.Numero == request.Cnpj!))
                 return ResponseResultError("Cnpj já informado anteriormente");
 
-            var entidade = mapper.Map<Domain.Entities.Empresa>(message);
+            var entidade = mapper.Map<Domain.Entities.Empresa>(request);
 
             if (entidade.Invalid)
                 return entidade.ValidationResult.ToResponseResult();

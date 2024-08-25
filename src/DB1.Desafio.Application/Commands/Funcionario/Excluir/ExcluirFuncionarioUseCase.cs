@@ -3,15 +3,15 @@ using DB1.Core.DomainObjects;
 using DB1.Core.Extensions;
 using DB1.Desafio.Domain.Repositories;
 
-namespace DB1.Desafio.Application.Commands.Cargo.Excluir
+namespace DB1.Desafio.Application.Commands.Funcionario.Excluir
 {
-    public interface IExcluirCargoUseCase
+    public interface IExcluirFuncionarioUseCase
     {
         Task<ResponseResult> ExecutarAsync(Guid id);
     }
 
-    internal class ExcluirCargoUseCase(
-        ICargoRepository cargoRepository) : CommandUseCase, IExcluirCargoUseCase
+    public class ExcluirFuncionarioUseCase(
+        IFuncionarioRepository funcionarioRepository) : CommandUseCase, IExcluirFuncionarioUseCase
     {
         public async Task<ResponseResult> ExecutarAsync(Guid id)
         {
@@ -19,13 +19,13 @@ namespace DB1.Desafio.Application.Commands.Cargo.Excluir
             {
                 if (id == Guid.Empty) return ResponseResultError("Informe o ID corretamente");
 
-                var entidade = await cargoRepository.ObterPorIdAsync(id);
+                var entidade = await funcionarioRepository.ObterPorIdAsync(id);
 
                 if (entidade is null) return ResponseResultError("Registro não encontrado");
 
-                cargoRepository.Remover(entidade);
+                funcionarioRepository.Remover(entidade);
 
-                var result = await PersistirDados(cargoRepository.UnitOfWork);
+                var result = await PersistirDados(funcionarioRepository.UnitOfWork);
                 return result.ToResponseResult();
             }
             catch (Microsoft.EntityFrameworkCore.DbUpdateException)

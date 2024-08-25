@@ -9,6 +9,11 @@ using DB1.Desafio.Application.Commands.Empresa.Editar;
 using DB1.Desafio.Application.Commands.Empresa.ObterComFiltro;
 using DB1.Desafio.Application.Commands.Empresa.ObterPorId;
 using DB1.Desafio.Application.Commands.Empresa.ObterTodos;
+using DB1.Desafio.Application.Commands.Funcionario.Criar;
+using DB1.Desafio.Application.Commands.Funcionario.Editar;
+using DB1.Desafio.Application.Commands.Funcionario.ObterComFiltro;
+using DB1.Desafio.Application.Commands.Funcionario.ObterPorId;
+using DB1.Desafio.Application.Commands.Funcionario.ObterTodos;
 using DB1.Desafio.Application.Mappings.Converters;
 using DB1.Desafio.Domain.Entities;
 using DB1.Desafio.Domain.Enums;
@@ -67,11 +72,26 @@ namespace DB1.Desafio.Application.Mappings
 
             CreateMap<Cargo, ObterPorIdCargoResponse>();
 
-            CreateMap<Cargo, ObterTodosCargoResponse>();
+            CreateMap<Cargo, ObterComFiltroCargoResponse>();
             #endregion
 
             #region Funcionario
+            CreateMap<CriarFuncionarioRequest, Funcionario>()
+                .ForMember(p => p.EmpresaId, opt => opt.Ignore());
+            CreateMap<Funcionario, CriarFuncionarioResponse>();
 
+            CreateMap<EditarFuncionarioRequest, Funcionario>()
+                .ForMember(p => p.EmpresaId, opt => opt.Ignore());
+            CreateMap<Funcionario, EditarFuncionarioResponse>();
+
+            CreateMap<Funcionario, ObterPorIdFuncionarioResponse>();
+
+            CreateMap<Funcionario, ObterTodosFuncionarioResponse>()
+                .ForMember(p => p.CargoNome, static opt => 
+                    opt.MapFrom(static x => x.FuncionarioCargos.OrderBy(o => o.DataVinculo).Last().Cargo.Nome));
+            CreateMap<Funcionario, ObterComFiltroFuncionarioResponse>()
+                .ForMember(p => p.CargoNome, static opt =>
+                    opt.MapFrom(static x => x.FuncionarioCargos.OrderBy(o => o.DataVinculo).Last().Cargo.Nome));
             #endregion
         }
     }

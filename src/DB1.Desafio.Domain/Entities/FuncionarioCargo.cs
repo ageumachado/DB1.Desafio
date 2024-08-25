@@ -16,10 +16,10 @@ namespace DB1.Desafio.Domain.Entities
         protected FuncionarioCargo() { }
 
         [SetsRequiredMembers]
-        public FuncionarioCargo(Funcionario funcionario, Guid cargoId, DateTime dataVinculo)
+        public FuncionarioCargo(Funcionario funcionario, Cargo cargo, DateTime dataVinculo)
         {
             Funcionario = funcionario;
-            CargoId = cargoId;
+            Cargo = cargo;
             DataVinculo = dataVinculo;
         }
     }

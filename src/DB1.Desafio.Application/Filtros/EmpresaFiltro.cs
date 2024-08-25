@@ -2,7 +2,7 @@
 
 namespace DB1.Desafio.Application.Filtros
 {
-    public class EmpresaFiltro : ICustomQueryable
+    public class EmpresaFiltro
     {
         public string? Nome { get; set; }
         public string? Cnpj { get; set; }

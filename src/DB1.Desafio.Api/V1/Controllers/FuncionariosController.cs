@@ -1,8 +1,10 @@
-﻿using DB1.Desafio.Application.Commands.Cargo.Criar;
-using DB1.Desafio.Application.Commands.Cargo.ObterPorId;
-using DB1.Desafio.Application.Commands.Cargo.ObterTodos;
-using DB1.Desafio.Application.Commands.Cargo.Editar;
-using DB1.Desafio.Application.Commands.Cargo.Excluir;
+﻿using DB1.Desafio.Application.Commands.Funcionario.Criar;
+using DB1.Desafio.Application.Commands.Funcionario.Editar;
+using DB1.Desafio.Application.Commands.Funcionario.Excluir;
+using DB1.Desafio.Application.Commands.Funcionario.ObterComFiltro;
+using DB1.Desafio.Application.Commands.Funcionario.ObterPorId;
+using DB1.Desafio.Application.Commands.Funcionario.ObterTodos;
+using DB1.Desafio.Application.Filtros;
 using DB1.WebApi.Core.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -11,15 +13,16 @@ namespace DB1.Desafio.Api.V1.Controllers
 {
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
-    public class CargosController : MainController
+    public class FuncionariosController : MainController
     {
+
         [HttpGet]
         [SwaggerOperation(Summary = "Obtém a lista com todos os registros")]
-        [ProducesResponseType(typeof(ObterComFiltroCargoResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ObterTodosFuncionarioResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(NotFoundObjectResult), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Get([FromServices] IObterTodosCargoUseCase useCase)
+        public async Task<IActionResult> Get([FromServices] IObterTodosFuncionarioUseCase useCase)
         {
             var response = await useCase.ExecutarAsync();
             return CustomResponse(response);
@@ -27,25 +30,39 @@ namespace DB1.Desafio.Api.V1.Controllers
 
         [HttpGet("{id:guid}")]
         [SwaggerOperation(Summary = "Obtém o registro por id")]
-        [ProducesResponseType(typeof(ObterPorIdCargoResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ObterPorIdFuncionarioResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(NotFoundObjectResult), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Get([FromServices] IObterPorIdCargoUseCase useCase, Guid id)
+        public async Task<IActionResult> Get([FromServices] IObterPorIdFuncionarioUseCase useCase, Guid id)
         {
             var response = await useCase.ExecutarAsync(id);
             return CustomResponse(response);
         }
 
+        [HttpGet("pesquisar")]
+        [SwaggerOperation(Summary = "Obtém a lista dos registros por filtro")]
+        [ProducesResponseType(typeof(ObterComFiltroFuncionarioResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(NotFoundObjectResult), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Get(
+            [FromServices] IObterComFiltroFuncionarioUseCase useCase,
+            [FromQuery] FuncionarioFiltro filtro)
+        {
+            var response = await useCase.ExecutarAsync(filtro);
+            return CustomResponse(response);
+        }
+
         [HttpPost]
         [SwaggerOperation(Summary = "Adiciona novo registro")]
-        [ProducesResponseType(typeof(CriarCargoResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(CriarFuncionarioResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(NotFoundObjectResult), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Post(
-            [FromServices] ICriarCargoUseCase useCase,
-            [FromBody] CriarCargoRequest request)
+            [FromServices] ICriarFuncionarioUseCase useCase,
+            [FromBody] CriarFuncionarioRequest request)
         {
             var response = await useCase.ExecutarAsync(request);
             return CustomResponse(response);
@@ -53,14 +70,14 @@ namespace DB1.Desafio.Api.V1.Controllers
 
         [HttpPut("{id:guid}")]
         [SwaggerOperation(Summary = "Atualiza registro com base no id")]
-        [ProducesResponseType(typeof(EditarCargoResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(EditarFuncionarioResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(NotFoundObjectResult), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Put(
-            [FromServices] IEditarCargoUseCase useCase,
+            [FromServices] IEditarFuncionarioUseCase useCase,
             Guid id,
-            [FromBody] EditarCargoRequest request)
+            [FromBody] EditarFuncionarioRequest request)
         {
             var response = await useCase.ExecutarAsync(id, request);
             return CustomResponse(response);
@@ -73,7 +90,7 @@ namespace DB1.Desafio.Api.V1.Controllers
         [ProducesResponseType(typeof(NotFoundObjectResult), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Delete(
-            [FromServices] IExcluirCargoUseCase useCase, Guid id)
+            [FromServices] IExcluirFuncionarioUseCase useCase, Guid id)
         {
             var response = await useCase.ExecutarAsync(id);
             return CustomResponse(response);
