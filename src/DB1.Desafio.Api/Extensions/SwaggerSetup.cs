@@ -42,6 +42,8 @@ namespace DB1.Desafio.Api.Extensions
                         Array.Empty<string>()
                     }
                 });
+
+                c.EnableAnnotations();
             });
         }
 

@@ -94,7 +94,7 @@ namespace DB1.Desafio.Tests.Domain
         public void Funcionario_Cpf_AcimaNumeroPadrao_DeveGerarError()
         {
             // Arrange
-            var funcionario = new Funcionario(NOME, string.Concat(CPF, "0"), DateTime.Now.AddDays(-100));
+            var funcionario = new Funcionario(NOME, new Core.ValueObjects.Cpf(string.Concat(CPF, "0")), DateTime.Now.AddDays(-100));
 
             // Act
             var result = funcionario.Invalid;
@@ -109,7 +109,7 @@ namespace DB1.Desafio.Tests.Domain
         public void Funcionario_Cpf_AbaixoNumeroPadrao_DeveGerarError()
         {
             // Arrange
-            var funcionario = new Funcionario(NOME, CPF.Substring(0, CPF.Length - 1), DateTime.Now.AddDays(-100));
+            var funcionario = new Funcionario(NOME, new Core.ValueObjects.Cpf(CPF[..^1]), DateTime.Now.AddDays(-100));
 
             // Act
             var result = funcionario.Invalid;
