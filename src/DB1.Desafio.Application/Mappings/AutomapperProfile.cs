@@ -2,16 +2,12 @@
 using DB1.Core.ValueObjects;
 using DB1.Desafio.Application.Commands.Empresa.Criar;
 using DB1.Desafio.Application.Commands.Empresa.Editar;
+using DB1.Desafio.Application.Commands.Empresa.ObterComFiltro;
 using DB1.Desafio.Application.Commands.Empresa.ObterPorId;
+using DB1.Desafio.Application.Commands.Empresa.ObterTodos;
 using DB1.Desafio.Application.Mappings.Converters;
 using DB1.Desafio.Domain.Entities;
 using DB1.Desafio.Domain.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace DB1.Desafio.Application.Mappings
 {
@@ -26,13 +22,10 @@ namespace DB1.Desafio.Application.Mappings
         {
             #region Empresa
 
-            
-            CreateMap<CriarEmpresaRequest, Empresa>();
-            //CreateMap<Empresa, CriarEmpresaRequest>()
-            //.ConstructUsing(p =>
-            //    new Empresa(p.Nome, Cnpj.Parse(p.Cnpj!), p.DataFundacao, p.Ativo ? StatusEmpresa.Ativo : StatusEmpresa.Inativo));
-            //.ForMember(p => p.Status, opt =>
-            //opt.ConvertUsing(new BooleanToEnumConverter<StatusEmpresa>(StatusEmpresa.Ativo, StatusEmpresa.Inativo), src => src.Ativo));
+
+            CreateMap<CriarEmpresaRequest, Empresa>()
+                .ConstructUsing(p =>
+                    new Empresa(Guid.Empty, p.Nome, Cnpj.Parse(p.Cnpj!), p.DataFundacao, p.Ativo ? StatusEmpresa.Ativo : StatusEmpresa.Inativo));
 
             CreateMap<Empresa, CriarEmpresaRequest>()
                 .ForMember(dest => dest.Ativo, opt =>
@@ -42,14 +35,25 @@ namespace DB1.Desafio.Application.Mappings
                 .ForMember(dest => dest.Ativo, opt =>
                     opt.ConvertUsing(new EnumToBooleanConverter<StatusEmpresa>(StatusEmpresa.Ativo), src => src.Status));
 
-            CreateMap<EditarEmpresaRequest, Empresa>();
+            CreateMap<EditarEmpresaRequest, Empresa>()
+                .ConstructUsing(p =>
+                    new Empresa(p.Id, p.Nome, Cnpj.Parse(p.Cnpj!), p.DataFundacao, p.Ativo ? StatusEmpresa.Ativo : StatusEmpresa.Inativo));
 
             CreateMap<Empresa, EditarEmpresaResponse>()
                 .ForMember(dest => dest.Ativo, opt =>
                     opt.ConvertUsing(new EnumToBooleanConverter<StatusEmpresa>(StatusEmpresa.Ativo), src => src.Status));
 
             CreateMap<Empresa, ObterPorIdEmpresaResponse>()
-                .ForMember(dest => dest.Ativo, opt => opt.ConvertUsing(new EnumToBooleanConverter<StatusEmpresa>(StatusEmpresa.Ativo), src => src.Status));
+                .ForMember(dest => dest.Ativo,
+                    opt => opt.ConvertUsing(new EnumToBooleanConverter<StatusEmpresa>(StatusEmpresa.Ativo), src => src.Status));
+
+            CreateMap<Empresa, ObterTodosEmpresaResponse>();
+            //.ForMember(dest => dest.Ativo, opt =>
+            //    opt.Ignore());
+            //.ForMember(dest => dest.Ativo, 
+            //    opt => opt.ConvertUsing(new EnumToBooleanConverter<StatusEmpresa>(StatusEmpresa.Ativo), src => src.Status));
+
+            CreateMap<Empresa, ObterComFiltroEmpresaResponse>();
 
             #endregion
         }

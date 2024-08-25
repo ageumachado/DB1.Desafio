@@ -1,6 +1,8 @@
 ﻿using DB1.Core.Mediator;
 using DB1.Desafio.Application.Commands.Empresa.Criar;
 using DB1.Desafio.Application.Commands.Empresa.Editar;
+using DB1.Desafio.Application.Commands.Empresa.Excluir;
+using DB1.Desafio.Application.Commands.Empresa.ObterComFiltro;
 using DB1.Desafio.Application.Commands.Empresa.ObterPorId;
 using DB1.Desafio.Application.Commands.Empresa.ObterTodos;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,7 +24,9 @@ namespace DB1.Desafio.Application
                 .AddScoped<ICriarEmpresaUseCase, CriarEmpresaUseCase>()
                 .AddScoped<IEditarEmpresaUseCase, EditarEmpresaUseCase>()
                 .AddScoped<IObterPorIdEmpresaUseCase, ObterPorIdEmpresaUseCase>()
-                .AddScoped<IObterTodosEmpresaUseCase, ObterTodosEmpresaUseCase>();
+                .AddScoped<IObterTodosEmpresaUseCase, ObterTodosEmpresaUseCase>()
+                .AddScoped<IObterComFiltroEmpresaUseCase, ObterComFiltroEmpresaUseCase>()
+                .AddScoped<IExcluirEmpresaUseCase, ExcluirEmpresaUseCase>();
             #endregion
 
             return services;
