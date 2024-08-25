@@ -32,6 +32,7 @@ namespace DB1.Desafio.Application.Commands.Empresa.Criar
 
             var result = await PersistirDados(empresaRepository.UnitOfWork);
             var response = mapper.Map<CriarEmpresaResponse>(entidade);
+            response.Id = entidade.Id;
             return result.ToResponseResult(response);
         }
     }

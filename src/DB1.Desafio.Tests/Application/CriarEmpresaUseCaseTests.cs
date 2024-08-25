@@ -30,11 +30,12 @@ namespace DB1.Desafio.Tests.Application
 
         [Fact(DisplayName = "Nova empresa válida")]
         [Trait("Empresa", "UseCase - Adicionar")]
-        public async void EmpresaUseCase_NovaEmpresa_DeveEstarValido()
+        public async Task EmpresaUseCase_NovaEmpresa_DeveEstarValido()
         {
             // Arrange
             var empresaUseCase = new CriarEmpresaUseCase(empresaRepoMock.Object, mapper);
             var empresa = empresaBogusFixture.GerarEmpresaValida();
+            empresa.Id = Guid.Empty;
             var empresaRequest = mapper.Map<CriarEmpresaRequest>(empresa);
 
             // Act
@@ -44,13 +45,13 @@ namespace DB1.Desafio.Tests.Application
             Assert.True(response.EhValido());
             Assert.NotNull(response.Data);
             Assert.IsType<CriarEmpresaResponse>(response.Data);
-            Assert.Equal(empresa.Id, empresaRequest.Id);
+            Assert.Equal(empresa.Id, response.Data.Id);
             empresaRepoMock.Verify(r => r.Adicionar(empresa), Times.Once);
         }
 
         [Fact(DisplayName = "Nova empresa inválida")]
         [Trait("Empresa", "UseCase - Adicionar")]
-        public async void EmpresaUseCase_NovaEmpresa_DeveEstarInvalido()
+        public async Task EmpresaUseCase_NovaEmpresa_DeveEstarInvalido()
         {
             // Arrange
             var empresaUseCase = new CriarEmpresaUseCase(empresaRepoMock.Object, mapper);

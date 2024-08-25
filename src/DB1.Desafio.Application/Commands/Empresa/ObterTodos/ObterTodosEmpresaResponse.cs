@@ -8,6 +8,4 @@
         public DateTime DataFundacao { get; set; }
         public string Status { get; set; }
     }
-
-
 }
