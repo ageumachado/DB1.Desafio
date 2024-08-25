@@ -49,7 +49,7 @@ namespace DB1.Desafio.Tests.Domain
         {
             // Arrange
             var nomeTamanhoAcima = FuncionarioValidator.NOME_MAX_LENGTH + 1;
-            var funcionario = new Funcionario(Geradores.CaracteresAleatorio(nomeTamanhoAcima), 
+            var funcionario = new Funcionario(Guid.NewGuid(), Geradores.CaracteresAleatorio(nomeTamanhoAcima), 
                 CPF, DATA_CONTRATACAO);
 
             // Act
@@ -65,7 +65,7 @@ namespace DB1.Desafio.Tests.Domain
         public void Funcionario_DataContratacao_IgualDataMinima_DeveGerarError()
         {
             // Arrange
-            var funcionario = new Funcionario(NOME, CPF, DateTime.MinValue);
+            var funcionario = new Funcionario(Guid.NewGuid(), NOME, CPF, DateTime.MinValue);
 
             // Act
             var result = funcionario.Invalid;
@@ -80,7 +80,7 @@ namespace DB1.Desafio.Tests.Domain
         public void Funcionario_DataContratacao_MaiorDataMinima_DeveGerarSucesso()
         {
             // Arrange
-            var funcionario = new Funcionario(NOME, CPF, DateTime.MinValue.AddDays(1));
+            var funcionario = new Funcionario(Guid.NewGuid(), NOME, CPF, DateTime.MinValue.AddDays(1));
 
             // Act
             var result = funcionario.Valid;
@@ -95,7 +95,7 @@ namespace DB1.Desafio.Tests.Domain
         public void Funcionario_Cpf_AcimaNumeroPadrao_DeveGerarError()
         {
             // Arrange
-            var funcionario = new Funcionario(NOME, new Core.ValueObjects.Cpf(string.Concat(CPF, "0")), DateTime.Now.AddDays(-100));
+            var funcionario = new Funcionario(Guid.NewGuid(), NOME, new Core.ValueObjects.Cpf(string.Concat(CPF, "0")), DateTime.Now.AddDays(-100));
 
             // Act
             var result = funcionario.Invalid;
@@ -110,7 +110,7 @@ namespace DB1.Desafio.Tests.Domain
         public void Funcionario_Cpf_AbaixoNumeroPadrao_DeveGerarError()
         {
             // Arrange
-            var funcionario = new Funcionario(NOME, new Core.ValueObjects.Cpf(CPF[..^1]), DateTime.Now.AddDays(-100));
+            var funcionario = new Funcionario(Guid.NewGuid(), NOME, new Core.ValueObjects.Cpf(CPF[..^1]), DateTime.Now.AddDays(-100));
 
             // Act
             var result = funcionario.Invalid;
@@ -125,7 +125,7 @@ namespace DB1.Desafio.Tests.Domain
         public void Funcionario_NovaFuncionario_DeveValoresCorretos()
         {
             // Arrange
-            var funcionario = new Funcionario(NOME, CPF, DATA_CONTRATACAO);
+            var funcionario = new Funcionario(Guid.NewGuid(), NOME, CPF, DATA_CONTRATACAO);
 
             // Act & Assert
             Assert.Equal(NOME, funcionario.Nome);

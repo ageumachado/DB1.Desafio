@@ -29,7 +29,7 @@ namespace DB1.Desafio.Tests.Application
         }
 
         [Fact(DisplayName = "Nova empresa válida")]
-        [Trait("Empresa", "UseCase - Adicionar")]
+        [Trait("Empresa", "UseCase - Criar")]
         public async Task EmpresaUseCase_NovaEmpresa_DeveEstarValido()
         {
             // Arrange
@@ -50,7 +50,7 @@ namespace DB1.Desafio.Tests.Application
         }
 
         [Fact(DisplayName = "Nova empresa inválida")]
-        [Trait("Empresa", "UseCase - Adicionar")]
+        [Trait("Empresa", "UseCase - Criar")]
         public async Task EmpresaUseCase_NovaEmpresa_DeveEstarInvalido()
         {
             // Arrange

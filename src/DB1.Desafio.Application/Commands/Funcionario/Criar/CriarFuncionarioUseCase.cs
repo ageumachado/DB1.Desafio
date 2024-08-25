@@ -44,6 +44,7 @@ namespace DB1.Desafio.Application.Commands.Funcionario.Criar
 
             var result = await PersistirDados(funcionarioRepository.UnitOfWork);
             var response = mapper.Map<CriarFuncionarioResponse>(funcionario);
+            response.Id = funcionario.Id;
             response.CargoId = request.CargoId;
             return result.ToResponseResult(response);
         }

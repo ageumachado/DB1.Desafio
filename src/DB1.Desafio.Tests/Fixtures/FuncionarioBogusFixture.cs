@@ -28,14 +28,16 @@ namespace DB1.Desafio.Tests.Fixtures
                     if (!dadosValido)
                     {
                         return new Funcionario(
+                            Guid.Empty,
                             "",
                             "",
                             DateTime.MinValue);
                     }
                     return new Funcionario(
-                    f.Name.FullName(),
-                    Geradores.GerarCpf(),
-                    f.Date.Recent(20).Date);
+                        f.Random.Guid(),
+                        f.Name.FullName(),
+                        Geradores.GerarCpf(),
+                        f.Date.Recent(20).Date);
                 });
 
             return entidades.Generate(quantidade);

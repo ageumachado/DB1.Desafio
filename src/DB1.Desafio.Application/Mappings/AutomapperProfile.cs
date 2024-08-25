@@ -62,10 +62,15 @@ namespace DB1.Desafio.Application.Mappings
 
             #region Funcionario
             CreateMap<CriarFuncionarioRequest, Funcionario>()
+                .ConstructUsing(p =>
+                    new Funcionario(Guid.Empty, p.Nome, Cpf.Parse(p.Cpf!), p.DataContratacao))
                 .ForMember(p => p.EmpresaId, opt => opt.Ignore());
             CreateMap<Funcionario, CriarFuncionarioResponse>();
+            CreateMap<Funcionario, CriarFuncionarioRequest>();
 
             CreateMap<EditarFuncionarioRequest, Funcionario>()
+                .ConstructUsing(p =>
+                    new Funcionario(p.Id, p.Nome, Cpf.Parse(p.Cpf!), p.DataContratacao))
                 .ForMember(p => p.EmpresaId, opt => opt.Ignore());
             CreateMap<Funcionario, EditarFuncionarioResponse>();
 

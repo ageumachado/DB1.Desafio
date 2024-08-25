@@ -15,8 +15,9 @@ namespace DB1.Desafio.Domain.Entities
         // EF
         protected Funcionario() { }
 
-        public Funcionario(string nome, Cpf cpf, DateTime dataContratacao)
+        public Funcionario(Guid id, string nome, Cpf cpf, DateTime dataContratacao)
         {
+            Id = id;
             Nome = nome;
             Cpf = cpf;
             DataContratacao = dataContratacao;
